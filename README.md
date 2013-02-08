@@ -16,10 +16,10 @@ A simple mock:
 	Enable-Mock | iex
 
 	function Original { "original" }
-	Original | Out-Host			# "original"
+	Original		# "original"
 
 	Mock Original { "mocked" }
-	Original | Out-Host			# "mocked"
+	Original		# "mocked"
 
 Mocking with cases:
 
