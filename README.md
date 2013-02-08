@@ -38,6 +38,8 @@ Mocking with cases:
 
 Call tracking:
 
+	Enable-Mock | iex
+
 	function Hello { param ([string] $who) "Hello, $who" }
 	Mock Hello { } -when { $who -eq "Bob" } -name Bob
 	Mock Hello { "Good day, $who" }
@@ -65,7 +67,7 @@ A variety of ways:
 
 - PSGet - [http://psget.net/](http://psget.net)
 	- Get PSGet
-	- Install-Module PSMock
+	- Install-Module -nugetpackageid PSMock
 	- PSMock will be installed into as a global module
 - NuGet - [http://nuget.org/packages/PSMock](http://nuget.org/packages/PSMock)
 	- Install-Package PSMock
