@@ -26,15 +26,15 @@ Mocking with cases:
 	Enable-Mock | iex
 
 	function Hello { param ([string] $who) "Hello, $who" }
-	Hello you | Out-Host		# "Hello, you"
+	Hello you		# "Hello, you"
 
 	Mock Hello { } -when { $who -eq "Bob" }
-	Hello you | Out-Host		# "Hello, you"
-	Hello bob | Out-Host		# nothing
+	Hello you		# "Hello, you"
+	Hello bob		# nothing
 
 	Mock Hello { "Good day, $who" }
-	Hello bob | Out-Host		# nothing
-	Hello you | Out-Host		# "Good day, you"
+	Hello bob		# nothing
+	Hello you		# "Good day, you"
 
 Call tracking:
 
@@ -43,8 +43,8 @@ Call tracking:
 	function Hello { param ([string] $who) "Hello, $who" }
 	Mock Hello { } -when { $who -eq "Bob" } -name Bob
 	Mock Hello { "Good day, $who" }
-	Hello bob | Out-Host		# nothing
-	Hello you | Out-Host		# "Good day, you"
+	Hello bob					# nothing
+	Hello you					# "Good day, you"
 	(Get-Mock Hello).Count		# 2
 	(Get-Mock Hello -case Bob).Count		# 1
 	(Get-Mock Hello -case default).Count	# 1
