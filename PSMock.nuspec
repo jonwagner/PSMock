@@ -4,8 +4,11 @@
     <id>PSMock</id>
     <version>1.0.0</version>
     <title>PSMock</title>
-    <description>A mocking library for PowerShell, including dyamic mocks, multiple context levels, call tracking.</description>
-    <tags>powershell unit testing mocking</tags>
+    <description>
+	A mocking library for PowerShell, including dyamic mocks, multiple context levels, call tracking.
+	Part of the PSST PowerShell Suite for Testing.
+    </description>
+    <tags>powershell unit testing mocking psst</tags>
     <authors>Jon Wagner</authors>
     <projectUrl>https://github.com/jonwagner/PSMock</projectUrl>
     <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
