@@ -227,7 +227,7 @@ function Add-Mock {
             @('Verbose', 'Debug', 'ErrorAction', 'WarningAction', 'ErrorVariable', 'WarningVariable', 'OutVariable', 'OutBuffer') |
                 % { $metaData.Parameters.Remove($_) | Out-Null }
             $mock.CmdletBinding = [Management.Automation.ProxyCommand]::GetCmdletBindingAttribute($metadata)
-            $mock.Parameters = [Management.Automation.ProxyCommand]::GetParamBlock($metadata)
+            $mock.Parameters = [Management.Automation.ProxyCommand]::GetParamBlock($metadata) -replace 'Mandatory=\$true','Mandatory=$false'
 
             # we also have to inject the parameters into when and with so the developer doesn't need to
             $case.When = "{ $($mock.CmdletBinding) param ($($mock.Parameters)) $($case.When) }" | iex
@@ -241,7 +241,7 @@ function Add-Mock {
 
         # create a global function to implement the mock
         Microsoft.PowerShell.Management\Set-Item function:\global:PSMock-$CommandName -value `
-            "$($mock.CmdletBinding) param ($($mock.Parameters)) Invoke-Mock @{ CommandName=`"$CommandName`"; BoundParameters=`$PSBoundParameters; Args=`$args }"
+            "$($mock.CmdletBinding) param ($($mock.Parameters)) Invoke-Mock @{ CommandName=`"$CommandName`"; BoundParameters=`$PSBoundParameters; Args=`$args; Input=`@(`$input) }"
     }
 
     # this mock is now official
