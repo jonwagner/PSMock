@@ -217,10 +217,12 @@ Test-Mocks
 
 Mock Original { "mocked, $p" }
 Import-Module .\PSMock.psm1 -force
+Enable-Mock | iex
 Assert-Equal "FORCE RELOAD - NO MOCKS" "original, test" (Caller 'test')
 Mock Original { "mocked, $p" }
 Assert-Equal "RELOAD - ONE MOCKS" "mocked, test" (Caller 'test')
 Import-Module .\PSMock.psm1 -force
+Enable-Mock | iex
 
 #########################################################
 # redefine a function with outstanding mocks

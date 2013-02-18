@@ -33,7 +33,7 @@ function Enable-Mock {
     <#
         .FORWARDHELPTARGETNAME Add-Mock
     #>
-    function global:Mock {
+    function Mock {
         param (
             [Parameter(Mandatory=$true)] [string] $CommandName,
             [scriptblock] $With = {},
@@ -54,6 +54,13 @@ function Enable-Mock {
         Add-Mock -CommandName $CommandName -Original $original @PSBoundParameters
     }
 '@
+}
+
+<#
+    .FORWARDHELPTARGETNAME Enable-Mock
+#>
+function Mock {
+    throw "Mocks are not enabled. Call Enable-Mock | iex"
 }
 
 <#
@@ -574,4 +581,4 @@ $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
     Clear-Mocks
 }
 
-Export-ModuleMember Enable-Mock, Add-Mock, Remove-Mock, Clear-Mocks, Get-Mock, Invoke-Mock, Enter-MockContext, Exit-MockContext, MockContext
+Export-ModuleMember Mock, Enable-Mock, Add-Mock, Remove-Mock, Clear-Mocks, Get-Mock, Invoke-Mock, Enter-MockContext, Exit-MockContext, MockContext

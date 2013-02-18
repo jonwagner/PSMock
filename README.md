@@ -6,8 +6,9 @@ PSMock can mock functions and commands, filter mocks, track calls, and manage mu
 
 PSMock is part of the PSST PowerShell Suite for Testing:
 
-* [PSMock](https://github.com/jonwagner/PSMock)
-* [PShould](https://github.com/jonwagner/PShould)
+* [PSMock - mocking for PowerShell](https://github.com/jonwagner/PSMock)
+* [PShould - fluent assertions for PowerShell](https://github.com/jonwagner/PShould)
+* [PSate - test runner for PowerShell](https://github.com/jonwagner/PSate)
 
 ## Examples ##
 
