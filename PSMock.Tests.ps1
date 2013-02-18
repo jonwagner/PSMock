@@ -131,6 +131,10 @@ Mock NoFunction { param ([string] $p) "nothing, $p" }
 Assert-Equal "MOCK NON-FUNCTION WITH PARAM" "nothing, you" (NoFunction "you")
 Remove-Mock NoFunction
 
+Mock NoFunction { "nothing" }
+Mock NoFunction { "override" }
+Assert-Equal "MOCK NON-FUNCTION OVERRIDE" "override" (NoFunction)
+
 #########################################################
 # mocking a command
 #########################################################
