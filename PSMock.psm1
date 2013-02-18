@@ -33,7 +33,7 @@ function Enable-Mock {
     <#
         .FORWARDHELPTARGETNAME Add-Mock
     #>
-    function Mock {
+    function global:Mock {
         param (
             [Parameter(Mandatory=$true)] [string] $CommandName,
             [scriptblock] $With = {},
@@ -376,7 +376,8 @@ function Remove-Mock {
     # if there is no base mock to fall back on
     if (!$mock.BaseMock) {
         # remove the function and the alias
-        Microsoft.PowerShell.Management\Remove-Item function:\global:PSMock-$CommandName
+        Microsoft.PowerShell.Management\Remove-Item function:\global:PSMock-$CommandName -ErrorAction SilentlyContinue
+        Microsoft.PowerShell.Management\Remove-Item function:PSMock-$CommandName -ErrorAction SilentlyContinue
         Microsoft.PowerShell.Management\Remove-Item alias:$CommandName
     }
 }

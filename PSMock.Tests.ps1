@@ -251,3 +251,5 @@ Assert-Equal "CASE CALLS - 1" 1 $case.Count
 if ($failedTests -gt 0) {
     throw "$failedTests tests failed"
 }
+
+Clear-Mocks
