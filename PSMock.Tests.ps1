@@ -75,6 +75,11 @@ Mock Original { "mocked with param" } -When { param ([string] $p) $true }
 Assert-Equal "MOCK WITH WHEN PARAM" "mocked with param" (Caller 'test')
 Clear-Mocks
 
+Mock Original { param ([string] $p) "mocked with param" }
+Mock Original { "mocked with with param" } -When { param ([string] $p) $true }
+Assert-Equal "SECOND MOCK WITH WHEN PARAM" "mocked with with param" (Caller 'test')
+Clear-Mocks
+
 $who = 'test'
 MockContext {
 
