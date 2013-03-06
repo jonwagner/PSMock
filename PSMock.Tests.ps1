@@ -68,6 +68,13 @@ Assert-Equal "DEFAULT ORDER OVERRIDE" "case mock, test" (Caller 'test')
 Assert-Equal "DEFAULT ORDER FALLBACK" "default mock, other" (Caller 'other')
 Clear-Mocks
 
+Mock Original { param ([string] $p) "mocked with param" }
+Assert-Equal "MOCK WITH WITH PARAM" "mocked with param" (Caller 'test')
+Clear-Mocks
+Mock Original { "mocked with param" } -When { param ([string] $p) $true }
+Assert-Equal "MOCK WITH WHEN PARAM" "mocked with param" (Caller 'test')
+Clear-Mocks
+
 $who = 'test'
 MockContext {
 

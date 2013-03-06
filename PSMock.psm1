@@ -230,8 +230,13 @@ function Add-Mock {
             $mock.Parameters = [Management.Automation.ProxyCommand]::GetParamBlock($metadata) -replace 'Mandatory=\$true','Mandatory=$false'
 
             # we also have to inject the parameters into when and with so the developer doesn't need to
-            $case.When = "{ $($mock.CmdletBinding) param ($($mock.Parameters)) $($case.When) }" | iex
-            $case.With = "{ $($mock.CmdletBinding) param ($($mock.Parameters)) $($case.With) }" | iex
+            $paramsMatch = '^\s*param\s*\('
+            if ($case.When -notmatch $paramsMatch) {
+                $case.When = "{ $($mock.CmdletBinding) param ($($mock.Parameters)) $($case.When) }" | iex
+            }
+            if ($case.With -notmatch $paramsMatch) {
+                $case.With = "{ $($mock.CmdletBinding) param ($($mock.Parameters)) $($case.With) }" | iex
+            }
         }
 
         # we need to modify execution in the scope that called this module.
