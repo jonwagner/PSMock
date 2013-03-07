@@ -319,7 +319,7 @@ function Get-Mock {
         if ($mock) {
 
             if ($Case) {
-                return $($mock.Cases |? Name -eq $Case)
+                return $($mock.Cases |? { $_.Name -eq $Case })
             }
             else {
                 return $mock
@@ -377,8 +377,9 @@ function Remove-Mock {
 
     # if a name was specified, remove that case
     if ($Name) {
+
         # remove the case
-        $mock.Cases = @($mock.Cases |? Name -ne $Name)
+        $mock.Cases = @($mock.Cases |? { $_.Name -ne $Name })
 
         # if there are cases left, we can quit, otherwise continue and remove the mock
         if ($mock.Cases.Count -gt 0) {
